@@ -19,9 +19,14 @@ public class BookRepository<T> implements ProjectRepository<Book> {
 
     @Override
     public void store(Book book) {
-        book.setId(book.hashCode());
-        logger.info("store new book: " + book);
-        repo.add(book);
+        System.out.println(book);
+        if (book.getAuthor().equals("") && book.getSize() == null && book.getTitle().equals("")) {
+            logger.info("can't save empty book");
+        } else {
+            book.setId(book.hashCode());
+            logger.info("store new book: " + book);
+            repo.add(book);
+        }
     }
 
     @Override
@@ -33,5 +38,21 @@ public class BookRepository<T> implements ProjectRepository<Book> {
             }
         }
         return false;
+    }
+
+    @Override
+    public boolean removeItemByAuthorRegex(String authorRegexToRemove) {
+        if (authorRegexToRemove.equals("")) {
+            return false;
+        }
+        int i = 0;
+        for (Book book : retreiveAll()) {
+            if (book.getAuthor().contains(authorRegexToRemove)) {
+                logger.info("remove book completed: " + book);
+                repo.remove(book);
+                i++;
+            }
+        }
+        return i > 0;
     }
 }
