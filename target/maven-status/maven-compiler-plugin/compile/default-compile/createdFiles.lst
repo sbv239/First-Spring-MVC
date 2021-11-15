@@ -1,0 +1,7 @@
+com\example\app\services\ProjectRepository.class
+com\example\app\services\BookRepository.class
+com\example\app\services\BookService.class
+com\example\app\services\LoginService.class
+com\example\web\controllers\BookShelfController.class
+com\example\web\dto\Book.class
+com\example\web\dto\LoginForm.class
