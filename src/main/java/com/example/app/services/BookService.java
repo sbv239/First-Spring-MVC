@@ -4,11 +4,13 @@ import com.example.web.dto.Book;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.logging.Logger;
 
 @Service
 public class BookService {
 
     private final ProjectRepository<Book> bookRepo;
+    private final Logger logger = Logger.getLogger(String.valueOf(BookService.class));
 
     @Autowired
     public BookService(BookRepository<Book> bookRepo) {
@@ -20,14 +22,18 @@ public class BookService {
     }
 
     public void saveBook(Book book) {
-        bookRepo.store(book);
+        if (book.getAuthor().equals("") && book.getSize() == null && book.getTitle().equals("")) {
+            logger.info("can't save empty book");
+        } else {
+            bookRepo.store(book);
+        }
     }
 
     public boolean removeBookId(Integer bookIdtoRemove) {
         return bookRepo.removeItemById(bookIdtoRemove);
     }
 
-    public boolean removeBookByAuthorRegex(String authorRegexToRemove) {
-        return bookRepo.removeItemByAuthorRegex(authorRegexToRemove);
+    public void removeBookByAuthorRegex(String authorRegexToRemove) {
+        bookRepo.removeItemByAuthorRegex(authorRegexToRemove);
     }
 }

@@ -14,8 +14,8 @@ import java.util.logging.Logger;
 @Controller
 @RequestMapping("/login")
 public class LoginController {
-    private Logger logger = Logger.getLogger(String.valueOf(LoginController.class));
-    private LoginService loginService;
+    private final Logger logger = Logger.getLogger(String.valueOf(LoginController.class));
+    private final LoginService loginService;
 
     @Autowired
     public LoginController(LoginService loginService) {

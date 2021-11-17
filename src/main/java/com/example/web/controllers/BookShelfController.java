@@ -40,21 +40,15 @@ public class BookShelfController {
 
     @PostMapping("/remove")
     public String removeBook(@RequestParam(value = "bookIdToRemove") Integer bookIdtoRemove) {
-        if (bookService.removeBookId(bookIdtoRemove)) {
-            return "redirect:/books/shelf";
-        } else {
+        if (!bookService.removeBookId(bookIdtoRemove)) {
             logger.info("such ID doesn't exist: " + bookIdtoRemove);
-            return "redirect:/books/shelf";
         }
+        return "redirect:/books/shelf";
     }
 
     @PostMapping("/removeByRegex")
     public String removeBook(@RequestParam(value = "queryRegex") String authorRegexToRemove) {
-        if (bookService.removeBookByAuthorRegex(authorRegexToRemove)) {
-            return "redirect:/books/shelf";
-        } else {
-            logger.info("can't find such regex: " + authorRegexToRemove);
-            return "redirect:/books/shelf";
-        }
+        bookService.removeBookByAuthorRegex(authorRegexToRemove);
+        return "redirect:/books/shelf";
     }
 }
