@@ -33,7 +33,7 @@ public class BookService {
         return bookRepo.removeItemById(bookIdtoRemove);
     }
 
-    public void removeBookByAuthorRegex(String authorRegexToRemove) {
-        bookRepo.removeItemByAuthorRegex(authorRegexToRemove);
+    public void removeBookByRegex(String regexToRemove) {
+        bookRepo.removeItemByRegex(regexToRemove);
     }
 }
