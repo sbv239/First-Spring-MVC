@@ -1,5 +1,7 @@
 package com.example.web.dto;
 
+import javax.validation.constraints.NotNull;
+
 public class LoginForm {
 
     private String username;

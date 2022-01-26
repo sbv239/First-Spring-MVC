@@ -37,12 +37,16 @@
             <tr>
                 <td>
                     <input type="text" placeholder="author" th:field="*{author}">
+                    <p th:if="${#fields.hasErrors('author')}">Author field must be between 3-150 and not null</p>
                 </td>
                 <td>
                     <input type="text" placeholder="book_title" th:field="*{title}">
+                    <p th:if="${#fields.hasErrors('title')}">Title field must be between 3-150 and not null</p>
                 </td>
                 <td>
                     <input type="text" placeholder="size (pages)" th:field="*{size}">
+                    <p th:if="${#fields.hasErrors('size')}">Field value must be digit and less than 4 signs and not
+                        null</p>
                 </td>
                 <td>
                     <input type="submit" value="save">
@@ -50,30 +54,52 @@
             </tr>
         </table>
     </form>
-    <form method ="post" th:action="@{/books/remove}">
+    <form method="post" th:action="@{/books/remove}" th:object="${bookIdToRemove}">
         <table>
             <tr>
                 <td>
-                    <input type="text" placeholder="id number" th:name="bookIdToRemove">
+                    <input type="text" placeholder="id number" th:field="*{id}">
                 </td>
                 <td>
                     <input type="submit" value="remove">
                 </td>
+                <td th:if="${#fields.hasErrors()}">
+                    <p>Wrong id or not found</p>
+                </td>
             </tr>
         </table>
     </form>
-    <form method="post" th:action="@{/books/removeByRegex}">
+
+    <form method="post" th:action="@{/books/removeByRegex}" th:object="${bookRegexToRemove}">
         <table>
             <tr>
                 <td>
-                    <input type="text" placeholder="regex" th:name="queryRegex">
+                    <input type="text" placeholder="regex" th:field="*{regex}">
                 </td>
                 <td>
                     <input type="submit" value="remove by regex">
                 </td>
+                <td th:if="${#fields.hasErrors()}">
+                    <p>Regex must not be empty</p>
+                </td>
             </tr>
         </table>
     </form>
+
+    <form method="post" th:action="@{/books/uploadFile}" enctype="multipart/form-data">
+        <table>
+            <tr>
+                <td>
+                    <input type="file" name="file"/>
+                </td>
+                <td>
+                    <input type="submit" value="Upload">
+                    <span th:if="${errorMessage}" th:text="${errorMessage}">Error</span>
+                </td>
+            </tr>
+        </table>
+    </form>
+
     <table id="books">
         <tr>
             <th>id</th>

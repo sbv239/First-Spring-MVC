@@ -1,5 +1,7 @@
 package com.example.app.services;
 
+import com.example.web.dto.BookRegexToRemove;
+
 import java.util.List;
 
 public interface ProjectRepository<T> {
@@ -9,5 +11,5 @@ public interface ProjectRepository<T> {
 
     boolean removeItemById(Integer bookIdToRemove);
 
-    void removeItemByRegex(String regexToRemove);
+    void removeItemByRegex(BookRegexToRemove bookRegexToRemove);
 }

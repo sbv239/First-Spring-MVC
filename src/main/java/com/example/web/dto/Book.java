@@ -1,9 +1,19 @@
 package com.example.web.dto;
 
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class Book {
     private Integer id;
+    @NotNull
+    @Size(min=3, max=150)
     private String author;
+    @NotNull
+    @Size(min=3, max=150)
     private String title;
+    @NotNull
+    @Digits(integer = 4, fraction = 0)
     private Integer size;
 
     public Integer getId() {

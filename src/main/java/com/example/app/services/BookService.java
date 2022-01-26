@@ -1,16 +1,17 @@
 package com.example.app.services;
 
 import com.example.web.dto.Book;
+import com.example.web.dto.BookRegexToRemove;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
-import java.util.logging.Logger;
 
 @Service
 public class BookService {
 
     private final ProjectRepository<Book> bookRepo;
-    private final Logger logger = Logger.getLogger(String.valueOf(BookService.class));
+    private final Logger logger = Logger.getLogger(BookService.class);
 
     @Autowired
     public BookService(BookRepository<Book> bookRepo) {
@@ -29,11 +30,11 @@ public class BookService {
         }
     }
 
-    public boolean removeBookId(Integer bookIdtoRemove) {
-        return bookRepo.removeItemById(bookIdtoRemove);
+    public boolean removeBookId(Integer bookIdToRemove) {
+        return bookRepo.removeItemById(bookIdToRemove);
     }
 
-    public void removeBookByRegex(String regexToRemove) {
-        bookRepo.removeItemByRegex(regexToRemove);
+    public void removeBookByRegex(BookRegexToRemove bookRegexToRemove) {
+        bookRepo.removeItemByRegex(bookRegexToRemove);
     }
 }
